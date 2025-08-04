@@ -290,7 +290,8 @@ local function getInventoryVehicleValue(inventoryId, ignoreDamage)
   local value = math.max(getVehicleValue(vehicle.configBaseValue, vehicle, ignoreDamage), 0)
   local meetReputation = career_modules_inventory.getMeetReputation(inventoryId)
   local accidents = career_modules_inventory.getAccidents(inventoryId) or 0
-  local accidentMultiplier = career_modules_hardcore.isHardcoreMode() and 0.9 or 0.95
+  accidents = math.floor(accidents / 3)
+  local accidentMultiplier = career_modules_hardcore.isHardcoreMode() and 0.95 or 0.9994
   return value * (1 + meetReputation * 0.01) * (accidentMultiplier ^ accidents)
 end
 
